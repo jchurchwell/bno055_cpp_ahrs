@@ -56,18 +56,11 @@
 /*********************************************************/
 /*				INCLUDES	*/
 /*******************************************************/
-#include "bno055.hpp"
-
-
-bno055::bno055() {
-}
-
-bno055::bno055(const bno055& orig) {
-}
-
-bno055::~bno055() {
-}
-
+#include "bno055.h"
+/*! file <BNO055 >
+    brief <Sensor driver for BNO055> */
+/*	STRUCTURE DEFINITIONS	*/
+static struct bno055_t *p_bno055;
 /*	 LOCAL FUNCTIONS	*/
 /*!
  *	@brief
@@ -81,7 +74,7 @@ bno055::~bno055() {
  *
  *
  *	@return results of bus communication function
- *	@retval 0 -> Success---
+ *	@retval 0 -> Success
  *	@retval 1 -> Error
  *
  *	@note While changing the parameter of the bno055_t
@@ -92,7 +85,7 @@ bno055::~bno055() {
  *	affect the reference value of the parameter
  *	(Better case don't change the reference value of the parameter)
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_init(struct bno055_t *bno055)
+BNO055_RETURN_FUNCTION_TYPE bno055_init(struct bno055_t *bno055)
 {
 	/* Variable used to return value of
 	communication routine*/
@@ -158,8 +151,6 @@ BNO055_RETURN_FUNCTION_TYPE bno055::bno055_init(struct bno055_t *bno055)
 
 	return com_rslt;
 }
-
-
 /*!
  *	@brief
  *	This API gives data to the given register and
@@ -175,7 +166,7 @@ BNO055_RETURN_FUNCTION_TYPE bno055::bno055_init(struct bno055_t *bno055)
  *
  *
 */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_write_register(u8 v_addr_u8,
+BNO055_RETURN_FUNCTION_TYPE bno055_write_register(u8 v_addr_u8,
 u8 *p_data_u8, u8 v_len_u8)
 {
 	/* Variable used to return value of
@@ -206,7 +197,7 @@ u8 *p_data_u8, u8 v_len_u8)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_register(u8 v_addr_u8,
+BNO055_RETURN_FUNCTION_TYPE bno055_read_register(u8 v_addr_u8,
 u8 *p_data_u8, u8 v_len_u8)
 {
 	/* Variable used to return value of
@@ -233,7 +224,7 @@ u8 *p_data_u8, u8 v_len_u8)
  *	@retval 0 -> Success
  *	@retval 1 -> Error
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_chip_id(u8 *v_chip_id_u8)
+BNO055_RETURN_FUNCTION_TYPE bno055_read_chip_id(u8 *v_chip_id_u8)
 {
 	/* Variable used to return value of
 	communication routine*/
@@ -274,7 +265,7 @@ BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_chip_id(u8 *v_chip_id_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_sw_rev_id(u16 *v_sw_id_u8)
+BNO055_RETURN_FUNCTION_TYPE bno055_read_sw_rev_id(u16 *v_sw_id_u8)
 {
 	/* Variable used to return value of
 	communication routine*/
@@ -330,7 +321,7 @@ BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_sw_rev_id(u16 *v_sw_id_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_page_id(u8 *v_page_id_u8)
+BNO055_RETURN_FUNCTION_TYPE bno055_read_page_id(u8 *v_page_id_u8)
 {
 	/* Variable used to return value of
 	communication routine*/
@@ -370,7 +361,7 @@ BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_page_id(u8 *v_page_id_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_write_page_id(u8 v_page_id_u8)
+BNO055_RETURN_FUNCTION_TYPE bno055_write_page_id(u8 v_page_id_u8)
 {
 	/* Variable used to return value of
 	communication routine*/
@@ -413,7 +404,7 @@ BNO055_RETURN_FUNCTION_TYPE bno055::bno055_write_page_id(u8 v_page_id_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_accel_rev_id(
+BNO055_RETURN_FUNCTION_TYPE bno055_read_accel_rev_id(
 u8 *v_accel_rev_id_u8)
 {
 	/* Variable used to return value of
@@ -456,7 +447,7 @@ u8 *v_accel_rev_id_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_mag_rev_id(
+BNO055_RETURN_FUNCTION_TYPE bno055_read_mag_rev_id(
 u8 *v_mag_rev_id_u8)
 {
 	/* Variable used to return value of
@@ -501,7 +492,7 @@ u8 *v_mag_rev_id_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_gyro_rev_id(
+BNO055_RETURN_FUNCTION_TYPE bno055_read_gyro_rev_id(
 u8 *v_gyro_rev_id_u8)
 {
 	/* Variable used to return value of
@@ -545,7 +536,7 @@ u8 *v_gyro_rev_id_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_bl_rev_id(
+BNO055_RETURN_FUNCTION_TYPE bno055_read_bl_rev_id(
 u8 *v_bl_rev_id_u8)
 {
 	/* Variable used to return value of
@@ -593,7 +584,7 @@ u8 *v_bl_rev_id_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_accel_x(s16 *v_accel_x_s16)
+BNO055_RETURN_FUNCTION_TYPE bno055_read_accel_x(s16 *v_accel_x_s16)
 {
 	/* Variable used to return value of
 	communication routine*/
@@ -651,7 +642,7 @@ BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_accel_x(s16 *v_accel_x_s16)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_accel_y(s16 *v_accel_y_s16)
+BNO055_RETURN_FUNCTION_TYPE bno055_read_accel_y(s16 *v_accel_y_s16)
 {
 	/* Variable used to return value of
 	communication routine*/
@@ -711,7 +702,7 @@ BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_accel_y(s16 *v_accel_y_s16)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_accel_z(s16 *v_accel_z_s16)
+BNO055_RETURN_FUNCTION_TYPE bno055_read_accel_z(s16 *v_accel_z_s16)
 {
 	/* Variable used to return value of
 	communication routine*/
@@ -774,7 +765,7 @@ BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_accel_z(s16 *v_accel_z_s16)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_accel_xyz(
+BNO055_RETURN_FUNCTION_TYPE bno055_read_accel_xyz(
 struct bno055_accel_t *accel)
 {
 	/* Variable used to return value of
@@ -865,7 +856,7 @@ struct bno055_accel_t *accel)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_mag_x(s16 *v_mag_x_s16)
+BNO055_RETURN_FUNCTION_TYPE bno055_read_mag_x(s16 *v_mag_x_s16)
 {
 	/* Variable used to return value of
 	communication routine*/
@@ -924,7 +915,7 @@ BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_mag_x(s16 *v_mag_x_s16)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_mag_y(s16 *v_mag_y_s16)
+BNO055_RETURN_FUNCTION_TYPE bno055_read_mag_y(s16 *v_mag_y_s16)
 {
 	/* Variable used to return value of
 	communication routine*/
@@ -986,7 +977,7 @@ BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_mag_y(s16 *v_mag_y_s16)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_mag_z(s16 *v_mag_z_s16)
+BNO055_RETURN_FUNCTION_TYPE bno055_read_mag_z(s16 *v_mag_z_s16)
 {
 	/* Variable used to return value of
 	communication routine*/
@@ -1050,7 +1041,7 @@ BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_mag_z(s16 *v_mag_z_s16)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_mag_xyz(struct bno055_mag_t *mag)
+BNO055_RETURN_FUNCTION_TYPE bno055_read_mag_xyz(struct bno055_mag_t *mag)
 {
 	/* Variable used to return value of
 	communication routine*/
@@ -1140,7 +1131,7 @@ BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_mag_xyz(struct bno055_mag_t *mag
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_gyro_x(s16 *v_gyro_x_s16)
+BNO055_RETURN_FUNCTION_TYPE bno055_read_gyro_x(s16 *v_gyro_x_s16)
 {
 	/* Variable used to return value of
 	communication routine*/
@@ -1197,7 +1188,7 @@ BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_gyro_x(s16 *v_gyro_x_s16)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_gyro_y(s16 *v_gyro_y_s16)
+BNO055_RETURN_FUNCTION_TYPE bno055_read_gyro_y(s16 *v_gyro_y_s16)
 {
 	/* Variable used to return value of
 	communication routine*/
@@ -1249,7 +1240,7 @@ BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_gyro_y(s16 *v_gyro_y_s16)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_gyro_z(s16 *v_gyro_z_s16)
+BNO055_RETURN_FUNCTION_TYPE bno055_read_gyro_z(s16 *v_gyro_z_s16)
 {
 	/* Variable used to return value of
 	communication routine*/
@@ -1309,7 +1300,7 @@ BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_gyro_z(s16 *v_gyro_z_s16)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_gyro_xyz(struct bno055_gyro_t *gyro)
+BNO055_RETURN_FUNCTION_TYPE bno055_read_gyro_xyz(struct bno055_gyro_t *gyro)
 {
 	/* Variable used to return value of
 	communication routine*/
@@ -1393,7 +1384,7 @@ BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_gyro_xyz(struct bno055_gyro_t *g
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_euler_h(s16 *v_euler_h_s16)
+BNO055_RETURN_FUNCTION_TYPE bno055_read_euler_h(s16 *v_euler_h_s16)
 {
 	/* Variable used to return value of
 	communication routine*/
@@ -1421,14 +1412,14 @@ BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_euler_h(s16 *v_euler_h_s16)
                                 p_bno055->dev_addr,
                                 BNO055_EULER_H_LSB_VALUEH__REG,
                                 v_data_u8, BNO055_TWO_U8X);
-
+                        
                         v_data_u8[INDEX_ZERO] = BNO055_GET_BITSLICE
                                 (v_data_u8[INDEX_ZERO],
                                 BNO055_EULER_H_LSB_VALUEH);
 			v_data_u8[INDEX_ONE] = BNO055_GET_BITSLICE
                                 (v_data_u8[INDEX_ONE],
                                 BNO055_EULER_H_MSB_VALUEH);
-
+                        
 			*v_euler_h_s16 = (s16)((v_data_u8[INDEX_ONE] << BNO055_SHIFT_8_POSITION) | (v_data_u8[INDEX_ZERO]));
 		} else {
 		com_rslt = ERROR;
@@ -1447,7 +1438,7 @@ BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_euler_h(s16 *v_euler_h_s16)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_euler_r(s16 *v_euler_r_s16)
+BNO055_RETURN_FUNCTION_TYPE bno055_read_euler_r(s16 *v_euler_r_s16)
 {
 	/* Variable used to return value of
 	communication routine*/
@@ -1503,7 +1494,7 @@ BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_euler_r(s16 *v_euler_r_s16)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_euler_p(s16 *v_euler_p_s16)
+BNO055_RETURN_FUNCTION_TYPE bno055_read_euler_p(s16 *v_euler_p_s16)
 {
 	/* Variable used to return value of
 	communication routine*/
@@ -1566,7 +1557,7 @@ BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_euler_p(s16 *v_euler_p_s16)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_euler_hrp(
+BNO055_RETURN_FUNCTION_TYPE bno055_read_euler_hrp(
 struct bno055_euler_t *euler)
 {
 	/* Variable used to return value of
@@ -1628,7 +1619,7 @@ struct bno055_euler_t *euler)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_quaternion_w(
+BNO055_RETURN_FUNCTION_TYPE bno055_read_quaternion_w(
 s16 *v_quaternion_w_s16)
 {
 	/* Variable used to return value of
@@ -1686,7 +1677,7 @@ s16 *v_quaternion_w_s16)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_quaternion_x(
+BNO055_RETURN_FUNCTION_TYPE bno055_read_quaternion_x(
 s16 *v_quaternion_x_s16)
 {
 	/* Variable used to return value of
@@ -1742,7 +1733,7 @@ s16 *v_quaternion_x_s16)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_quaternion_y(
+BNO055_RETURN_FUNCTION_TYPE bno055_read_quaternion_y(
 s16 *v_quaternion_y_s16)
 {
 	/* Variable used to return value of
@@ -1799,7 +1790,7 @@ s16 *v_quaternion_y_s16)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_quaternion_z(
+BNO055_RETURN_FUNCTION_TYPE bno055_read_quaternion_z(
 s16 *v_quaternion_z_s16)
 {
 	/* Variable used to return value of
@@ -1866,7 +1857,7 @@ s16 *v_quaternion_z_s16)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_quaternion_wxyz(
+BNO055_RETURN_FUNCTION_TYPE bno055_read_quaternion_wxyz(
 struct bno055_quaternion_t *quaternion)
 {
 	/* Variable used to return value of
@@ -1967,7 +1958,7 @@ struct bno055_quaternion_t *quaternion)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_linear_accel_x(
+BNO055_RETURN_FUNCTION_TYPE bno055_read_linear_accel_x(
 s16 *v_linear_accel_x_s16)
 {
 	/* Variable used to return value of
@@ -2025,7 +2016,7 @@ s16 *v_linear_accel_x_s16)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_linear_accel_y(
+BNO055_RETURN_FUNCTION_TYPE bno055_read_linear_accel_y(
 s16 *v_linear_accel_y_s16)
 {
 	/* Variable used to return value of
@@ -2082,7 +2073,7 @@ s16 *v_linear_accel_y_s16)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_linear_accel_z(
+BNO055_RETURN_FUNCTION_TYPE bno055_read_linear_accel_z(
 s16 *v_linear_accel_z_s16)
 {
 	/* Variable used to return value of
@@ -2145,7 +2136,7 @@ s16 *v_linear_accel_z_s16)
  *	@retval 0 -> Success
  *	@retval 1 -> Error
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_linear_accel_xyz(
+BNO055_RETURN_FUNCTION_TYPE bno055_read_linear_accel_xyz(
 struct bno055_linear_accel_t *linear_accel)
 {
 	/* Variable used to return value of
@@ -2232,7 +2223,7 @@ struct bno055_linear_accel_t *linear_accel)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_gravity_x(
+BNO055_RETURN_FUNCTION_TYPE bno055_read_gravity_x(
 s16 *v_gravity_x_s16)
 {
 	/* Variable used to return value of
@@ -2290,7 +2281,7 @@ s16 *v_gravity_x_s16)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_gravity_y(
+BNO055_RETURN_FUNCTION_TYPE bno055_read_gravity_y(
 s16 *v_gravity_y_s16)
 {
 	/* Variable used to return value of
@@ -2348,7 +2339,7 @@ s16 *v_gravity_y_s16)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_gravity_z(
+BNO055_RETURN_FUNCTION_TYPE bno055_read_gravity_z(
 s16 *v_gravity_z_s16)
 {
 	/* Variable used to return value of
@@ -2413,7 +2404,7 @@ s16 *v_gravity_z_s16)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_gravity_xyz(
+BNO055_RETURN_FUNCTION_TYPE bno055_read_gravity_xyz(
 struct bno055_gravity_t *gravity)
 {
 	/* Variable used to return value of
@@ -2499,7 +2490,7 @@ struct bno055_gravity_t *gravity)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_temp_data(s8 *v_temp_s8)
+BNO055_RETURN_FUNCTION_TYPE bno055_read_temp_data(s8 *v_temp_s8)
 {
 	/* Variable used to return value of
 	communication routine*/
@@ -2543,7 +2534,7 @@ BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_temp_data(s8 *v_temp_s8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_accel_x_msq(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_accel_x_msq(
 float *v_accel_x_f)
 {
 	/* Variable used to return value of
@@ -2589,7 +2580,7 @@ float *v_accel_x_f)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_accel_x_mg(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_accel_x_mg(
 float *v_accel_x_f)
 {
 	/* Variable used to return value of
@@ -2633,7 +2624,7 @@ float *v_accel_x_f)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_accel_y_msq(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_accel_y_msq(
 float *v_accel_y_f)
 {
 	/* Variable used to return value of
@@ -2676,7 +2667,7 @@ float *v_accel_y_f)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_accel_y_mg(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_accel_y_mg(
 float *v_accel_y_f)
 {
 	/* Variable used to return value of
@@ -2719,7 +2710,7 @@ float *v_accel_y_f)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_accel_z_msq(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_accel_z_msq(
 float *v_accel_z_f)
 {
 	/* Variable used to return value of
@@ -2764,7 +2755,7 @@ float *v_accel_z_f)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_accel_z_mg(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_accel_z_mg(
 float *v_accel_z_f)
 {
 	/* Variable used to return value of
@@ -2812,7 +2803,7 @@ float *v_accel_z_f)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_accel_xyz_msq(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_accel_xyz_msq(
 struct bno055_accel_float_t *accel_xyz)
 {
 	/* Variable used to return value of
@@ -2864,7 +2855,7 @@ struct bno055_accel_float_t *accel_xyz)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_accel_xyz_mg(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_accel_xyz_mg(
 struct bno055_accel_float_t *accel_xyz)
 {
 	/* Variable used to return value of
@@ -2911,7 +2902,7 @@ struct bno055_accel_float_t *accel_xyz)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_mag_x_uT(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_mag_x_uT(
 float *v_mag_x_f)
 {
 	/* Variable used to return value of
@@ -2943,7 +2934,7 @@ float *v_mag_x_f)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_mag_y_uT(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_mag_y_uT(
 float *v_mag_y_f)
 {
 	/* Variable used to return value of
@@ -2975,7 +2966,7 @@ float *v_mag_y_f)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_mag_z_uT(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_mag_z_uT(
 float *v_mag_z_f)
 {
 	/* Variable used to return value of
@@ -3012,7 +3003,7 @@ float *v_mag_z_f)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_mag_xyz_uT(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_mag_xyz_uT(
 struct bno055_mag_float_t *mag_xyz_data)
 {
 	/* Variable used to return value of
@@ -3045,7 +3036,7 @@ struct bno055_mag_float_t *mag_xyz_data)
  *	@retval 0 -> Success
  *	@retval 1 -> Error
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_gyro_x_dps(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_gyro_x_dps(
 float *v_gyro_x_f)
 {
 	/* Variable used to return value of
@@ -3088,7 +3079,7 @@ float *v_gyro_x_f)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_gyro_x_rps(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_gyro_x_rps(
 float *v_gyro_x_f)
 {
 	/* Variable used to return value of
@@ -3131,7 +3122,7 @@ float *v_gyro_x_f)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_gyro_y_dps(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_gyro_y_dps(
 float *v_gyro_y_f)
 {
 	/* Variable used to return value of
@@ -3175,7 +3166,7 @@ float *v_gyro_y_f)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_gyro_y_rps(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_gyro_y_rps(
 float *v_gyro_y_f)
 {
 	/* Variable used to return value of
@@ -3218,7 +3209,7 @@ float *v_gyro_y_f)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_gyro_z_dps(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_gyro_z_dps(
 float *v_gyro_z_f)
 {
 	/* Variable used to return value of
@@ -3261,7 +3252,7 @@ float *v_gyro_z_f)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_gyro_z_rps(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_gyro_z_rps(
 float *v_gyro_z_f)
 {
 	/* Variable used to return value of
@@ -3310,7 +3301,7 @@ float *v_gyro_z_f)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_gyro_xyz_dps(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_gyro_xyz_dps(
 struct bno055_gyro_float_t *gyro_xyz_data)
 {
 	/* Variable used to return value of
@@ -3362,7 +3353,7 @@ struct bno055_gyro_float_t *gyro_xyz_data)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_gyro_xyz_rps(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_gyro_xyz_rps(
 struct bno055_gyro_float_t *gyro_xyz_data)
 {
 	/* Variable used to return value of
@@ -3407,7 +3398,7 @@ struct bno055_gyro_float_t *gyro_xyz_data)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_euler_h_deg(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_euler_h_deg(
 float *v_euler_h_f)
 {
 	/* Variable used to return value of
@@ -3449,7 +3440,7 @@ float *v_euler_h_f)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_euler_h_rad(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_euler_h_rad(
 float *v_euler_h_f)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -3488,7 +3479,7 @@ float *v_euler_h_f)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_euler_r_deg(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_euler_r_deg(
 float *v_euler_r_f)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -3526,7 +3517,7 @@ float *v_euler_r_f)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_euler_r_rad(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_euler_r_rad(
 float *v_euler_r_f)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -3565,7 +3556,7 @@ float *v_euler_r_f)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_euler_p_deg(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_euler_p_deg(
 float *v_euler_p_f)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -3605,7 +3596,7 @@ float *v_euler_p_f)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_euler_p_rad(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_euler_p_rad(
 float *v_euler_p_f)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -3651,7 +3642,7 @@ float *v_euler_p_f)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_euler_hpr_deg(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_euler_hpr_deg(
 struct bno055_euler_float_t *euler_hpr)
 {
 	/* Variable used to return value of
@@ -3702,7 +3693,7 @@ struct bno055_euler_float_t *euler_hpr)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_euler_hpr_rad(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_euler_hpr_rad(
 struct bno055_euler_float_t *euler_hpr)
 {
 	/* Variable used to return value of
@@ -3745,7 +3736,7 @@ struct bno055_euler_float_t *euler_hpr)
  *	@retval 0 -> Success
  *	@retval 1 -> Error
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_linear_accel_x_msq(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_linear_accel_x_msq(
 float *v_linear_accel_x_f)
 {
 	/* Variable used to return value of
@@ -3775,7 +3766,7 @@ float *v_linear_accel_x_f)
  *	@retval 0 -> Success
  *	@retval 1 -> Error
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_linear_accel_y_msq(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_linear_accel_y_msq(
 float *v_linear_accel_y_f)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -3804,7 +3795,7 @@ float *v_linear_accel_y_f)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_linear_accel_z_msq(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_linear_accel_z_msq(
 float *v_linear_accel_z_f)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -3841,7 +3832,7 @@ float *v_linear_accel_z_f)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_linear_accel_xyz_msq(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_linear_accel_xyz_msq(
 struct bno055_linear_accel_float_t *linear_accel_xyz)
 {
 	/* Variable used to return value of
@@ -3875,7 +3866,7 @@ struct bno055_linear_accel_float_t *linear_accel_xyz)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_gravity_float_x_msq(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_gravity_float_x_msq(
 float *v_gravity_x_f)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -3904,7 +3895,7 @@ float *v_gravity_x_f)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_gravity_float_y_msq(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_gravity_float_y_msq(
 float *v_gravity_y_f)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -3932,7 +3923,7 @@ float *v_gravity_y_f)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_gravity_float_z_msq(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_gravity_float_z_msq(
 float *v_gravity_z_f)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -3968,7 +3959,7 @@ float *v_gravity_z_f)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_gravity_xyz_msq(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_gravity_xyz_msq(
 struct bno055_gravity_float_t *gravity_xyz)
 {
 	/* Variable used to return value of
@@ -4003,7 +3994,7 @@ struct bno055_gravity_float_t *gravity_xyz)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_temp_fahrenheit(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_temp_fahrenheit(
 float *v_temp_f)
 {
 	/* Variable used to return value of
@@ -4046,7 +4037,7 @@ float *v_temp_f)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_float_temp_celsius(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_float_temp_celsius(
 float *v_temp_f)
 {
 	/* Variable used to return value of
@@ -4092,7 +4083,7 @@ float *v_temp_f)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_accel_x_msq(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_accel_x_msq(
 double *v_accel_x_d)
 {
 	/* Variable used to return value of
@@ -4137,7 +4128,7 @@ double *v_accel_x_d)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_accel_x_mg(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_accel_x_mg(
 double *v_accel_x_d)
 {
 	/* Variable used to return value of
@@ -4182,7 +4173,7 @@ double *v_accel_x_d)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_accel_y_msq(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_accel_y_msq(
 double *v_accel_y_d)
 {
 	/* Variable used to return value of
@@ -4226,7 +4217,7 @@ double *v_accel_y_d)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_accel_y_mg(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_accel_y_mg(
 double *v_accel_y_d)
 {
 	/* Variable used to return value of
@@ -4268,7 +4259,7 @@ double *v_accel_y_d)
  *	@retval 0 -> Success
  *	@retval 1 -> Error
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_accel_z_msq(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_accel_z_msq(
 double *v_accel_z_d)
 {
 	/* Variable used to return value of
@@ -4311,7 +4302,7 @@ double *v_accel_z_d)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_accel_z_mg(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_accel_z_mg(
 double *v_accel_z_d)
 {
 	/* Variable used to return value of
@@ -4360,7 +4351,7 @@ double *v_accel_z_d)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_accel_xyz_msq(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_accel_xyz_msq(
 struct bno055_accel_double_t *accel_xyz)
 {
 	/* Variable used to return value of
@@ -4411,7 +4402,7 @@ struct bno055_accel_double_t *accel_xyz)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_accel_xyz_mg(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_accel_xyz_mg(
 struct bno055_accel_double_t *accel_xyz)
 {
 	/* Variable used to return value of
@@ -4459,7 +4450,7 @@ struct bno055_accel_double_t *accel_xyz)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_mag_x_uT(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_mag_x_uT(
 double *v_mag_x_d)
 {
 	/* Variable used to return value of
@@ -4492,7 +4483,7 @@ double *v_mag_x_d)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_mag_y_uT(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_mag_y_uT(
 double *v_mag_y_d)
 {
 	/* Variable used to return value of
@@ -4525,7 +4516,7 @@ double *v_mag_y_d)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_mag_z_uT(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_mag_z_uT(
 double *v_mag_z_d)
 {
 	/* Variable used to return value of
@@ -4562,7 +4553,7 @@ double *v_mag_z_d)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_mag_xyz_uT(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_mag_xyz_uT(
 struct bno055_mag_double_t *mag_xyz)
 {
 	/* Variable used to return value of
@@ -4600,7 +4591,7 @@ struct bno055_mag_double_t *mag_xyz)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_gyro_x_dps(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_gyro_x_dps(
 double *v_gyro_x_d)
 {
 	/* Variable used to return value of
@@ -4644,7 +4635,7 @@ double *v_gyro_x_d)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_gyro_x_rps(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_gyro_x_rps(
 double *v_gyro_x_d)
 {
 	/* Variable used to return value of
@@ -4688,7 +4679,7 @@ double *v_gyro_x_d)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_gyro_y_dps(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_gyro_y_dps(
 double *v_gyro_y_d)
 {
 	/* Variable used to return value of
@@ -4732,7 +4723,7 @@ double *v_gyro_y_d)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_gyro_y_rps(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_gyro_y_rps(
 double *v_gyro_y_d)
 {
 	/* Variable used to return value of
@@ -4776,7 +4767,7 @@ double *v_gyro_y_d)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_gyro_z_dps(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_gyro_z_dps(
 double *v_gyro_z_d)
 {
 	/* Variable used to return value of
@@ -4820,7 +4811,7 @@ double *v_gyro_z_d)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_gyro_z_rps(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_gyro_z_rps(
 double *v_gyro_z_d)
 {
 	/* Variable used to return value of
@@ -4868,7 +4859,7 @@ double *v_gyro_z_d)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_gyro_xyz_dps(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_gyro_xyz_dps(
 struct bno055_gyro_double_t *gyro_xyz)
 {
 	/* Variable used to return value of
@@ -4919,7 +4910,7 @@ struct bno055_gyro_double_t *gyro_xyz)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_gyro_xyz_rps(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_gyro_xyz_rps(
 struct bno055_gyro_double_t *gyro_xyz)
 {
 	/* Variable used to return value of
@@ -4964,7 +4955,7 @@ struct bno055_gyro_double_t *gyro_xyz)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_euler_h_deg(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_euler_h_deg(
 double *v_euler_h_d)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -5004,7 +4995,7 @@ double *v_euler_h_d)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_euler_h_rad(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_euler_h_rad(
 double *v_euler_h_d)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -5044,7 +5035,7 @@ double *v_euler_h_d)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_euler_r_deg(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_euler_r_deg(
 double *v_euler_r_d)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -5084,7 +5075,7 @@ double *v_euler_r_d)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_euler_r_rad(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_euler_r_rad(
 double *v_euler_r_d)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -5124,7 +5115,7 @@ double *v_euler_r_d)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_euler_p_deg(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_euler_p_deg(
 double *v_euler_p_d)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -5165,7 +5156,7 @@ double *v_euler_p_d)
  *
  */
 
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_euler_p_rad(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_euler_p_rad(
 double *v_euler_p_d)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -5212,7 +5203,7 @@ double *v_euler_p_d)
  *
  */
 
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_euler_hpr_deg(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_euler_hpr_deg(
 struct bno055_euler_double_t *euler_hpr)
 {
 	/* Variable used to return value of
@@ -5264,7 +5255,7 @@ struct bno055_euler_double_t *euler_hpr)
  *
  */
 
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_euler_hpr_rad(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_euler_hpr_rad(
 struct bno055_euler_double_t *euler_hpr)
 {
 	/* Variable used to return value of
@@ -5311,7 +5302,7 @@ struct bno055_euler_double_t *euler_hpr)
  *
  */
 
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_linear_accel_x_msq(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_linear_accel_x_msq(
 double *v_linear_accel_x_d)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -5343,7 +5334,7 @@ double *v_linear_accel_x_d)
  *
  */
 
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_linear_accel_y_msq(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_linear_accel_y_msq(
 double *v_linear_accel_y_d)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -5375,7 +5366,7 @@ double *v_linear_accel_y_d)
  *
  */
 
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_linear_accel_z_msq(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_linear_accel_z_msq(
 double *v_linear_accel_z_d)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -5412,7 +5403,7 @@ double *v_linear_accel_z_d)
  *
  */
 
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_linear_accel_xyz_msq(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_linear_accel_xyz_msq(
 struct bno055_linear_accel_double_t *linear_accel_xyz)
 {
 	/* Variable used to return value of
@@ -5447,7 +5438,7 @@ struct bno055_linear_accel_double_t *linear_accel_xyz)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_gravity_double_x_msq(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_gravity_double_x_msq(
 double *v_gravity_x_d)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -5477,7 +5468,7 @@ double *v_gravity_x_d)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_gravity_double_y_msq(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_gravity_double_y_msq(
 double *v_gravity_y_d)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -5507,7 +5498,7 @@ double *v_gravity_y_d)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_gravity_double_z_msq(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_gravity_double_z_msq(
 double *v_gravity_z_d)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -5543,7 +5534,7 @@ double *v_gravity_z_d)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_gravity_xyz_msq(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_gravity_xyz_msq(
 struct bno055_gravity_double_t *gravity_xyz)
 {
 	/* Variable used to return value of
@@ -5578,7 +5569,7 @@ struct bno055_gravity_double_t *gravity_xyz)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_temp_fahrenheit(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_temp_fahrenheit(
 double *v_temp_d)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -5618,7 +5609,7 @@ double *v_temp_d)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_convert_double_temp_celsius(
+BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_temp_celsius(
 double *v_temp_d)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -5659,7 +5650,7 @@ double *v_temp_d)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_mag_calib_stat(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_mag_calib_stat(
 u8 *v_mag_calib_u8)
 {
 	/* Variable used to return value of
@@ -5704,7 +5695,7 @@ u8 *v_mag_calib_u8)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_accel_calib_stat(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_accel_calib_stat(
 u8 *v_accel_calib_u8)
 {
 	/* Variable used to return value of
@@ -5749,7 +5740,7 @@ u8 *v_accel_calib_u8)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_gyro_calib_stat(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_gyro_calib_stat(
 u8 *v_gyro_calib_u8)
 {
 	/* Variable used to return value of
@@ -5794,7 +5785,7 @@ u8 *v_gyro_calib_u8)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_sys_calib_stat(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_sys_calib_stat(
 u8 *v_sys_calib_u8)
 {
 	/* Variable used to return value of
@@ -5842,7 +5833,7 @@ u8 *v_sys_calib_u8)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_selftest_accel(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_selftest_accel(
 u8 *v_selftest_accel_u8)
 {
 	/* Variable used to return value of
@@ -5891,7 +5882,7 @@ u8 *v_selftest_accel_u8)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_selftest_mag(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_selftest_mag(
 u8 *v_selftest_mag_u8)
 {
 	/* Variable used to return value of
@@ -5938,7 +5929,7 @@ u8 *v_selftest_mag_u8)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_selftest_gyro(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_selftest_gyro(
 u8 *v_selftest_gyro_u8)
 {
 	/* Variable used to return value of
@@ -5985,7 +5976,7 @@ u8 *v_selftest_gyro_u8)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_selftest_mcu(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_selftest_mcu(
 u8 *v_selftest_mcu_u8)
 {
 	/* Variable used to return value of
@@ -6039,7 +6030,7 @@ u8 *v_selftest_mcu_u8)
  *	bno055_set_intr_gyro_any_motion()
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_intr_stat_gyro_any_motion(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_intr_stat_gyro_any_motion(
 u8 *v_gyro_any_motion_u8)
 {
 	/* Variable used to return value of
@@ -6094,7 +6085,7 @@ u8 *v_gyro_any_motion_u8)
  *
  *	bno055_set_intr_gyro_highrate()
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_intr_stat_gyro_highrate(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_intr_stat_gyro_highrate(
 u8 *v_gyro_highrate_u8)
 {
 	/* Variable used to return value of
@@ -6150,7 +6141,7 @@ u8 *v_gyro_highrate_u8)
  *	bno055_set_intr_accel_high_g()
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_intr_stat_accel_high_g(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_intr_stat_accel_high_g(
 u8 *v_accel_high_g_u8)
 {
 	/* Variable used to return value of
@@ -6205,7 +6196,7 @@ u8 *v_accel_high_g_u8)
  *
  *	bno055_set_intr_accel_any_motion()
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_intr_stat_accel_any_motion(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_intr_stat_accel_any_motion(
 u8 *v_accel_any_motion_u8)
 {
 	/* Variable used to return value of
@@ -6261,7 +6252,7 @@ u8 *v_accel_any_motion_u8)
  *
  *	bno055_set_intr_accel_nomotion()
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_intr_stat_accel_no_motion(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_intr_stat_accel_no_motion(
 u8 *v_accel_no_motion_u8)
 {
 	/* Variable used to return value of
@@ -6308,7 +6299,7 @@ u8 *v_accel_no_motion_u8)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_stat_main_clk(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_stat_main_clk(
 u8 *v_stat_main_clk_u8)
 {
 	/* Variable used to return value of
@@ -6352,7 +6343,7 @@ u8 *v_stat_main_clk_u8)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_sys_stat_code(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_sys_stat_code(
 u8 *v_sys_stat_u8)
 {
 	/* Variable used to return value of
@@ -6398,7 +6389,7 @@ u8 *v_sys_stat_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_sys_error_code(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_sys_error_code(
 u8 *v_sys_error_u8)
 {
 	/* Variable used to return value of
@@ -6447,7 +6438,7 @@ u8 *v_sys_error_u8)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_accel_unit(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_accel_unit(
 u8 *v_accel_unit_u8)
 {
 	/* Variable used to return value of
@@ -6496,7 +6487,7 @@ u8 *v_accel_unit_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_accel_unit(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_accel_unit(
 u8 v_accel_unit_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -6562,7 +6553,7 @@ if (p_bno055 == BNO055_ZERO_U8X) {
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_gyro_unit(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_gyro_unit(
 u8 *v_gyro_unit_u8)
 {
 	/* Variable used to return value of
@@ -6611,7 +6602,7 @@ u8 *v_gyro_unit_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_gyro_unit(u8 v_gyro_unit_u8)
+BNO055_RETURN_FUNCTION_TYPE bno055_set_gyro_unit(u8 v_gyro_unit_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 u8 v_data_u8r = BNO055_ZERO_U8X;
@@ -6676,7 +6667,7 @@ if (p_bno055 == BNO055_ZERO_U8X) {
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_euler_unit(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_euler_unit(
 u8 *v_euler_unit_u8)
 {
 	/* Variable used to return value of
@@ -6726,7 +6717,7 @@ u8 *v_euler_unit_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_euler_unit(u8 v_euler_unit_u8)
+BNO055_RETURN_FUNCTION_TYPE bno055_set_euler_unit(u8 v_euler_unit_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 u8 v_data_u8r = BNO055_ZERO_U8X;
@@ -6791,7 +6782,7 @@ if (p_bno055 == BNO055_ZERO_U8X) {
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_tilt_unit(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_tilt_unit(
 u8 *v_tilt_unit_u8)
 {
 	/* Variable used to return value of
@@ -6843,7 +6834,7 @@ u8 *v_tilt_unit_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_tilt_unit(u8 v_tilt_unit_u8)
+BNO055_RETURN_FUNCTION_TYPE bno055_set_tilt_unit(u8 v_tilt_unit_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 u8 v_data_u8r = BNO055_ZERO_U8X;
@@ -6906,7 +6897,7 @@ if (p_bno055 == BNO055_ZERO_U8X) {
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_temp_unit(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_temp_unit(
 u8 *v_temp_unit_u8)
 {
 	/* Variable used to return value of
@@ -6956,7 +6947,7 @@ u8 *v_temp_unit_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_temp_unit(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_temp_unit(
 u8 v_temp_unit_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -7022,7 +7013,7 @@ if (p_bno055 == BNO055_ZERO_U8X) {
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_data_output_format(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_data_output_format(
 u8 *v_data_output_format_u8)
 {
 	/* Variable used to return value of
@@ -7072,7 +7063,7 @@ u8 *v_data_output_format_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_data_output_format(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_data_output_format(
 u8 v_data_output_format_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -7160,7 +7151,7 @@ if (p_bno055 == BNO055_ZERO_U8X) {
  *	to configure the various settings of the BNO
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_operation_mode(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_operation_mode(
 u8 *v_operation_mode_u8)
 {
 	/* Variable used to return value of
@@ -7231,7 +7222,7 @@ u8 *v_operation_mode_u8)
  *	to configure the various settings of the BNO
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_operation_mode(u8 v_operation_mode_u8)
+BNO055_RETURN_FUNCTION_TYPE bno055_set_operation_mode(u8 v_operation_mode_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 u8 v_data_u8r = BNO055_ZERO_U8X;
@@ -7346,7 +7337,7 @@ if (p_bno055 == BNO055_ZERO_U8X) {
  *	refer data sheet 3.4.2
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_power_mode(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_power_mode(
 u8 *v_power_mode_u8)
 {
 	/* Variable used to return value of
@@ -7404,7 +7395,7 @@ u8 *v_power_mode_u8)
  *	refer data sheet 3.4.2
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_power_mode(u8 v_power_mode_u8)
+BNO055_RETURN_FUNCTION_TYPE bno055_set_power_mode(u8 v_power_mode_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 u8 v_data_u8r = BNO055_ZERO_U8X;
@@ -7469,7 +7460,7 @@ if (p_bno055 == BNO055_ZERO_U8X) {
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_intr_rst(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_intr_rst(
 u8 *v_intr_rst_u8)
 {
 	/* Variable used to return value of
@@ -7518,7 +7509,7 @@ u8 *v_intr_rst_u8)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_intr_rst(u8 v_intr_rst_u8)
+BNO055_RETURN_FUNCTION_TYPE bno055_set_intr_rst(u8 v_intr_rst_u8)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 	u8 v_data_u8r = BNO055_ZERO_U8X;
@@ -7571,7 +7562,7 @@ BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_intr_rst(u8 v_intr_rst_u8)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_clk_src(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_clk_src(
 u8 *v_clk_src_u8)
 {
 	/* Variable used to return value of
@@ -7619,7 +7610,7 @@ u8 *v_clk_src_u8)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_clk_src(u8 v_clk_src_u8)
+BNO055_RETURN_FUNCTION_TYPE bno055_set_clk_src(u8 v_clk_src_u8)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 	u8 v_data_u8r = BNO055_ZERO_U8X;
@@ -7673,7 +7664,7 @@ BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_clk_src(u8 v_clk_src_u8)
  *
  *	@note It resets the whole system
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_sys_rst(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_sys_rst(
 u8 *v_sys_rst_u8)
 {
 	/* Variable used to return value of
@@ -7723,7 +7714,7 @@ u8 *v_sys_rst_u8)
  *
  *	@note It resets the whole system
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_sys_rst(u8 v_sys_rst_u8)
+BNO055_RETURN_FUNCTION_TYPE bno055_set_sys_rst(u8 v_sys_rst_u8)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 	u8 v_data_u8r = BNO055_ZERO_U8X;
@@ -7777,7 +7768,7 @@ BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_sys_rst(u8 v_sys_rst_u8)
  *
  *	@note It triggers the self test
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_selftest(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_selftest(
 u8 *v_selftest_u8)
 {
 	/* Variable used to return value of
@@ -7829,7 +7820,7 @@ u8 *v_selftest_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_selftest(u8 v_selftest_u8)
+BNO055_RETURN_FUNCTION_TYPE bno055_set_selftest(u8 v_selftest_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 u8 v_data_u8r = BNO055_ZERO_U8X;
@@ -7895,7 +7886,7 @@ if (p_bno055 == BNO055_ZERO_U8X) {
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_temp_source(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_temp_source(
 u8 *v_temp_source_u8)
 {
 	/* Variable used to return value of
@@ -7945,7 +7936,7 @@ u8 *v_temp_source_u8)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_temp_source(u8 v_temp_source_u8)
+BNO055_RETURN_FUNCTION_TYPE bno055_set_temp_source(u8 v_temp_source_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 u8 v_data_u8r = BNO055_ZERO_U8X;
@@ -8026,7 +8017,7 @@ if (p_bno055 == BNO055_ZERO_U8X) {
  *	bno055_set_z_remap_sign()
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_axis_remap_value(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_axis_remap_value(
 u8 *v_remap_axis_u8)
 {
 	/* Variable used to return value of
@@ -8092,7 +8083,7 @@ u8 *v_remap_axis_u8)
  *	bno055_set_z_remap_sign()
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_axis_remap_value(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_axis_remap_value(
 u8 v_remap_axis_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -8187,7 +8178,7 @@ return com_rslt;
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_remap_x_sign(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_remap_x_sign(
 u8 *v_remap_x_sign_u8)
 {
 	/* Variable used to return value of
@@ -8236,7 +8227,7 @@ u8 *v_remap_x_sign_u8)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_remap_x_sign(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_remap_x_sign(
 u8 v_remap_x_sign_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -8302,7 +8293,7 @@ if (p_bno055 == BNO055_ZERO_U8X) {
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_remap_y_sign(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_remap_y_sign(
 u8 *v_remap_y_sign_u8)
 {
 	/* Variable used to return value of
@@ -8351,7 +8342,7 @@ u8 *v_remap_y_sign_u8)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_remap_y_sign(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_remap_y_sign(
 u8 v_remap_y_sign_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -8417,7 +8408,7 @@ if (p_bno055 == BNO055_ZERO_U8X) {
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_remap_z_sign(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_remap_z_sign(
 u8 *v_remap_z_sign_u8)
 {
 	/* Variable used to return value of
@@ -8466,7 +8457,7 @@ u8 *v_remap_z_sign_u8)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_remap_z_sign(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_remap_z_sign(
 u8 v_remap_z_sign_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -8541,7 +8532,7 @@ if (p_bno055 == BNO055_ZERO_U8X) {
  *
  *	@note : Each soft iron calibration matrix range from -32768 to +32767
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_sic_matrix(
+BNO055_RETURN_FUNCTION_TYPE bno055_read_sic_matrix(
 struct bno055_sic_matrix_t  *sic_matrix)
 {
 	/* Variable used to return value of
@@ -8737,7 +8728,7 @@ struct bno055_sic_matrix_t  *sic_matrix)
  *
  *	@note : Each soft iron calibration matrix range from -32768 to +32767
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_write_sic_matrix(
+BNO055_RETURN_FUNCTION_TYPE bno055_write_sic_matrix(
 struct bno055_sic_matrix_t  *sic_matrix)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -9189,7 +9180,7 @@ if (p_bno055 == BNO055_ZERO_U8X) {
  *	accel G range can be configured by using the
  *	bno055_set_accel_range() function
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_accel_offset(
+BNO055_RETURN_FUNCTION_TYPE bno055_read_accel_offset(
 struct bno055_accel_offset_t  *accel_offset)
 {
 	/* Variable used to return value of
@@ -9327,7 +9318,7 @@ struct bno055_accel_offset_t  *accel_offset)
  *	accel G range can be configured by using the
  *	bno055_set_accel_range() function
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_write_accel_offset(
+BNO055_RETURN_FUNCTION_TYPE bno055_write_accel_offset(
 struct bno055_accel_offset_t  *accel_offset)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -9550,7 +9541,7 @@ if (p_bno055 == BNO055_ZERO_U8X) {
  *	@note  The range of the magnetometer offset is +/-6400 in LSB
  */
 
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_mag_offset(
+BNO055_RETURN_FUNCTION_TYPE bno055_read_mag_offset(
 struct bno055_mag_offset_t  *mag_offset)
 {
 	/* Variable used to return value of
@@ -9678,7 +9669,7 @@ struct bno055_mag_offset_t  *mag_offset)
  *
  *	@note  The range of the magnetometer offset is +/-6400 in LSB
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_write_mag_offset(
+BNO055_RETURN_FUNCTION_TYPE bno055_write_mag_offset(
 struct bno055_mag_offset_t *mag_offset)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -9910,7 +9901,7 @@ if (p_bno055 == BNO055_ZERO_U8X) {
  *	Gyro range can be configured by using the
  *	bno055_set_gyro_range() function
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_read_gyro_offset(
+BNO055_RETURN_FUNCTION_TYPE bno055_read_gyro_offset(
 struct bno055_gyro_offset_t  *gyro_offset)
 {
 	/* Variable used to return value of
@@ -10021,7 +10012,7 @@ struct bno055_gyro_offset_t  *gyro_offset)
  *	Gyro range can be configured by using the
  *	bno055_set_gyro_range() function
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_write_gyro_offset(
+BNO055_RETURN_FUNCTION_TYPE bno055_write_gyro_offset(
 struct bno055_gyro_offset_t  *gyro_offset)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -10201,7 +10192,7 @@ if (p_bno055 == BNO055_ZERO_U8X) {
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_accel_range(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_accel_range(
 u8 *v_accel_range_u8)
 {
 	/* Variable used to return value of
@@ -10253,7 +10244,7 @@ u8 *v_accel_range_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_accel_range(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_accel_range(
 u8 v_accel_range_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -10338,7 +10329,7 @@ return com_rslt;
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_accel_bw(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_accel_bw(
 u8 *v_accel_bw_u8)
 {
 	/* Variable used to return value of
@@ -10394,7 +10385,7 @@ u8 *v_accel_bw_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_accel_bw(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_accel_bw(
 u8 v_accel_bw_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -10475,7 +10466,7 @@ return com_rslt;
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_accel_power_mode(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_accel_power_mode(
 u8 *v_accel_power_mode_u8)
 {
 	/* Variable used to return value of
@@ -10528,7 +10519,7 @@ u8 *v_accel_power_mode_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_accel_power_mode(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_accel_power_mode(
 u8 v_accel_power_mode_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -10613,7 +10604,7 @@ return com_rslt;
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_mag_data_output_rate(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_mag_data_output_rate(
 u8 *v_mag_data_output_rate_u8)
 {
 	/* Variable used to return value of
@@ -10669,7 +10660,7 @@ u8 *v_mag_data_output_rate_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_mag_data_output_rate(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_mag_data_output_rate(
 u8 v_mag_data_output_rate_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -10752,7 +10743,7 @@ return com_rslt;
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_mag_operation_mode(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_mag_operation_mode(
 u8 *v_mag_operation_mode_u8)
 {
 	/* Variable used to return value of
@@ -10804,7 +10795,7 @@ u8 *v_mag_operation_mode_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_mag_operation_mode(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_mag_operation_mode(
 u8 v_mag_operation_mode_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -10887,7 +10878,7 @@ return com_rslt;
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_mag_power_mode(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_mag_power_mode(
 u8 *v_mag_power_mode_u8)
 {
 	/* Variable used to return value of
@@ -10939,7 +10930,7 @@ u8 *v_mag_power_mode_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_mag_power_mode(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_mag_power_mode(
 u8 v_mag_power_mode_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -11021,7 +11012,7 @@ return com_rslt;
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_gyro_range(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_gyro_range(
 u8 *v_gyro_range_u8)
 {
 	/* Variable used to return value of
@@ -11074,7 +11065,7 @@ u8 *v_gyro_range_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_gyro_range(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_gyro_range(
 u8 v_gyro_range_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -11159,7 +11150,7 @@ return com_rslt;
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_gyro_bw(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_gyro_bw(
 u8 *v_gyro_bw_u8)
 {
 	/* Variable used to return value of
@@ -11214,7 +11205,7 @@ u8 *v_gyro_bw_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_gyro_bw(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_gyro_bw(
 u8 v_gyro_bw_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -11343,7 +11334,7 @@ return com_rslt;
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_gyro_power_mode(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_gyro_power_mode(
 u8 *v_gyro_power_mode_u8)
 {
 	/* Variable used to return value of
@@ -11396,7 +11387,7 @@ u8 *v_gyro_power_mode_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_gyro_power_mode(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_gyro_power_mode(
 u8 v_gyro_power_mode_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -11513,7 +11504,7 @@ return com_rslt;
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_accel_sleep_tmr_mode(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_accel_sleep_tmr_mode(
 u8 *v_sleep_tmr_u8)
 {
 	/* Variable used to return value of
@@ -11563,7 +11554,7 @@ u8 *v_sleep_tmr_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_accel_sleep_tmr_mode(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_accel_sleep_tmr_mode(
 u8 v_sleep_tmr_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -11652,7 +11643,7 @@ return com_rslt;
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_accel_sleep_durn(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_accel_sleep_durn(
 u8 *v_sleep_durn_u8)
 {
 	/* Variable used to return value of
@@ -11711,7 +11702,7 @@ u8 *v_sleep_durn_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_accel_sleep_durn(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_accel_sleep_durn(
 u8 v_sleep_durn_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -11787,7 +11778,7 @@ if (p_bno055 == BNO055_ZERO_U8X) {
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_gyro_sleep_durn(u8 *v_sleep_durn_u8)
+BNO055_RETURN_FUNCTION_TYPE bno055_get_gyro_sleep_durn(u8 *v_sleep_durn_u8)
 {
 	/* Variable used to return value of
 	communication routine*/
@@ -11831,7 +11822,7 @@ BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_gyro_sleep_durn(u8 *v_sleep_durn_
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_gyro_sleep_durn(u8 v_sleep_durn_u8)
+BNO055_RETURN_FUNCTION_TYPE bno055_set_gyro_sleep_durn(u8 v_sleep_durn_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 u8 v_data_u8r = BNO055_ZERO_U8X;
@@ -11905,7 +11896,7 @@ return com_rslt;
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_gyro_auto_sleep_durn(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_gyro_auto_sleep_durn(
 u8 *v_auto_sleep_durn_u8)
 {
 	/* Variable used to return value of
@@ -11951,7 +11942,7 @@ u8 *v_auto_sleep_durn_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_gyro_set_auto_sleep_durn(
+BNO055_RETURN_FUNCTION_TYPE bno055_gyro_set_auto_sleep_durn(
 u8 v_auto_sleep_durn_u8, u8 bw)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -12108,7 +12099,7 @@ return com_rslt;
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_mag_sleep_mode(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_mag_sleep_mode(
 u8 *v_sleep_mode_u8)
 {
 	/* Variable used to return value of
@@ -12153,7 +12144,7 @@ u8 *v_sleep_mode_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_mag_sleep_mode(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_mag_sleep_mode(
 u8 v_sleep_mode_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -12224,7 +12215,7 @@ if (p_bno055 == BNO055_ZERO_U8X) {
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_mag_sleep_durn(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_mag_sleep_durn(
 u8 *v_sleep_durn_u8)
 {
 	/* Variable used to return value of
@@ -12269,7 +12260,7 @@ u8 *v_sleep_durn_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_mag_sleep_durn(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_mag_sleep_durn(
 u8 v_sleep_durn_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -12364,7 +12355,7 @@ if (p_bno055 == BNO055_ZERO_U8X) {
  *	bno055_set_gyro_any_motion_awake_durn()
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_intr_mask_gyro_any_motion(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_intr_mask_gyro_any_motion(
 u8 *v_gyro_any_motion_u8)
 {
 	/* Variable used to return value of
@@ -12433,7 +12424,7 @@ u8 *v_gyro_any_motion_u8)
  *	bno055_set_gyro_any_motion_awake_durn()
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_intr_mask_gyro_any_motion(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_intr_mask_gyro_any_motion(
 u8 v_gyro_any_motion_u8)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -12523,7 +12514,7 @@ u8 v_gyro_any_motion_u8)
  *	bno055_set_gyro_highrate_z_durn()
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_intr_mask_gyro_highrate(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_intr_mask_gyro_highrate(
 u8 *v_gyro_highrate_u8)
 {
 	/* Variable used to return value of
@@ -12607,7 +12598,7 @@ u8 *v_gyro_highrate_u8)
  *	bno055_set_gyro_highrate_z_durn()
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_intr_mask_gyro_highrate(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_intr_mask_gyro_highrate(
 u8 v_gyro_highrate_u8)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -12678,7 +12669,7 @@ u8 v_gyro_highrate_u8)
  *	bno055_set_accel_high_g_durn()
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_intr_mask_accel_high_g(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_intr_mask_accel_high_g(
 u8 *v_accel_high_g_u8)
 {
 	/* Variable used to return value of
@@ -12742,7 +12733,7 @@ u8 *v_accel_high_g_u8)
  *	bno055_set_accel_high_g_durn()
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_intr_mask_accel_high_g(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_intr_mask_accel_high_g(
 u8 v_accel_high_g_u8)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -12813,7 +12804,7 @@ u8 v_accel_high_g_u8)
  *	bno055_set_accel_high_g_durn()
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_intr_mask_accel_any_motion(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_intr_mask_accel_any_motion(
 u8 *v_accel_any_motion_u8)
 {
 	/* Variable used to return value of
@@ -12876,7 +12867,7 @@ u8 *v_accel_any_motion_u8)
  *	bno055_set_accel_any_motion_thres()
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_intr_mask_accel_any_motion(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_intr_mask_accel_any_motion(
 u8 v_accel_any_motion_u8)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -12944,7 +12935,7 @@ u8 v_accel_any_motion_u8)
  *	bno055_set_accel_any_motion_thres())
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_intr_mask_accel_no_motion(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_intr_mask_accel_no_motion(
 u8 *v_accel_nomotion_u8)
 {
 	/* Variable used to return value of
@@ -13011,7 +13002,7 @@ u8 *v_accel_nomotion_u8)
  *	bno055_set_accel_slow_no_motion_enable()
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_intr_mask_accel_no_motion(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_intr_mask_accel_no_motion(
 u8 v_accel_nomotion_u8)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -13087,7 +13078,7 @@ u8 v_accel_nomotion_u8)
  *
  *	bno055_set_gyro_any_motion_awake_durn()
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_intr_gyro_any_motion(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_intr_gyro_any_motion(
 u8 *v_gyro_any_motion_u8)
 {
 	/* Variable used to return value of
@@ -13155,7 +13146,7 @@ u8 *v_gyro_any_motion_u8)
  *
  *	bno055_set_gyro_any_motion_awake_durn()
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_intr_gyro_any_motion(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_intr_gyro_any_motion(
 u8 v_gyro_any_motion_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -13245,7 +13236,7 @@ if (p_bno055 == BNO055_ZERO_U8X) {
  *	bno055_set_gyro_highrate_z_durn()
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_intr_gyro_highrate(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_intr_gyro_highrate(
 u8 *v_gyro_highrate_u8)
 {
 	/* Variable used to return value of
@@ -13329,7 +13320,7 @@ u8 *v_gyro_highrate_u8)
  *	bno055_set_gyro_highrate_z_durn()
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_intr_gyro_highrate(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_intr_gyro_highrate(
 u8 v_gyro_highrate_u8)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -13398,7 +13389,7 @@ u8 v_gyro_highrate_u8)
  *	bno055_set_accel_high_g_durn()
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_intr_accel_high_g(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_intr_accel_high_g(
 u8 *v_accel_high_g_u8)
 {
 	/* Variable used to return value of
@@ -13462,7 +13453,7 @@ u8 *v_accel_high_g_u8)
  *	bno055_set_accel_high_g_durn()
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_intr_accel_high_g(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_intr_accel_high_g(
 u8 v_accel_high_g_u8)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -13531,7 +13522,7 @@ u8 v_accel_high_g_u8)
  *	bno055_set_accel_any_motion_thres()
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_intr_accel_any_motion(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_intr_accel_any_motion(
 u8 *v_accel_any_motion_u8)
 {
 	/* Variable used to return value of
@@ -13594,7 +13585,7 @@ u8 *v_accel_any_motion_u8)
  *	bno055_set_accel_any_motion_thres()
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_intr_accel_any_motion(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_intr_accel_any_motion(
 u8 v_accel_any_motion_u8)
 {
 	BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -13667,7 +13658,7 @@ u8 v_accel_any_motion_u8)
  *	bno055_set_accel_slow_no_motion_enable()
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_intr_accel_no_motion(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_intr_accel_no_motion(
 u8 *v_accel_nomotion_u8)
 {
 	/* Variable used to return value of
@@ -13734,7 +13725,7 @@ u8 *v_accel_nomotion_u8)
  *	bno055_set_accel_slow_no_motion_enable()
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_intr_accel_no_motion(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_intr_accel_no_motion(
 u8 v_accel_nomotion_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -13798,7 +13789,7 @@ if (p_bno055 == BNO055_ZERO_U8X) {
  *     16g       |    31.25mg    |   1LSB
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_accel_any_motion_thres(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_accel_any_motion_thres(
 u8 *v_accel_any_motion_thres_u8)
 {
 	/* Variable used to return value of
@@ -13856,7 +13847,7 @@ u8 *v_accel_any_motion_thres_u8)
  *     16g       |    31.25mg    |   1LSB
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_accel_any_motion_thres(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_accel_any_motion_thres(
 u8 v_accel_any_motion_thres_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -13930,7 +13921,7 @@ return com_rslt;
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_accel_any_motion_durn(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_accel_any_motion_durn(
 u8 *v_accel_any_motion_durn_u8)
 {
 	/* Variable used to return value of
@@ -13980,7 +13971,7 @@ u8 *v_accel_any_motion_durn_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_accel_any_motion_durn(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_accel_any_motion_durn(
 u8 v_accel_any_motion_durn_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -14060,7 +14051,7 @@ return com_rslt;
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_accel_any_motion_no_motion_axis_enable(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_accel_any_motion_no_motion_axis_enable(
 u8 v_channel_u8, u8 *v_data_u8)
 {
 	/* Variable used to return value of
@@ -14142,7 +14133,7 @@ u8 v_channel_u8, u8 *v_data_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_accel_any_motion_no_motion_axis_enable(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_accel_any_motion_no_motion_axis_enable(
 u8 v_channel_u8, u8 v_data_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -14267,7 +14258,7 @@ return com_rslt;
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_accel_high_g_axis_enable(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_accel_high_g_axis_enable(
 u8 v_channel_u8, u8 *v_data_u8)
 {
 	/* Variable used to return value of
@@ -14349,7 +14340,7 @@ u8 v_channel_u8, u8 *v_data_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_accel_high_g_axis_enable(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_accel_high_g_axis_enable(
 u8 v_channel_u8, u8 v_data_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -14466,7 +14457,7 @@ return com_rslt;
  *	in a range from 2 ms to 512 ms
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_accel_high_g_durn(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_accel_high_g_durn(
 u8 *v_accel_high_g_durn_u8)
 {
 	/* Variable used to return value of
@@ -14515,7 +14506,7 @@ u8 *v_accel_high_g_durn_u8)
  *	in a range from 2 ms to 512 ms
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_accel_high_g_durn(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_accel_high_g_durn(
 u8 v_accel_high_g_durn_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -14596,7 +14587,7 @@ if (p_bno055 == BNO055_ZERO_U8X) {
  *     16g       |    62.5mg     |   1LSB
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_accel_high_g_thres(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_accel_high_g_thres(
 u8 *v_accel_high_g_thres_u8)
 {
 	/* Variable used to return value of
@@ -14650,7 +14641,7 @@ u8 *v_accel_high_g_thres_u8)
  *     16g       |    62.5mg     |   1LSB
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_accel_high_g_thres(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_accel_high_g_thres(
 u8 v_accel_high_g_thres_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -14730,7 +14721,7 @@ if (p_bno055 == BNO055_ZERO_U8X)  {
  *     8g        |    15.63mg    |   1LSB
  *     16g       |    31.25mg    |   1LSB
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_accel_slow_no_motion_thres(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_accel_slow_no_motion_thres(
 u8 *v_accel_slow_no_motion_thres_u8)
 {
 	/* Variable used to return value of
@@ -14784,7 +14775,7 @@ u8 *v_accel_slow_no_motion_thres_u8)
  *     8g        |    15.63mg    |   1LSB
  *     16g       |    31.25mg    |   1LSB
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_accel_slow_no_motion_thres(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_accel_slow_no_motion_thres(
 u8 v_accel_slow_no_motion_thres_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -14857,7 +14848,7 @@ return com_rslt;
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_accel_slow_no_motion_enable(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_accel_slow_no_motion_enable(
 u8 *v_accel_slow_no_motion_en_u8)
 {
 	/* Variable used to return value of
@@ -14905,7 +14896,7 @@ u8 *v_accel_slow_no_motion_en_u8)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_accel_slow_no_motion_enable(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_accel_slow_no_motion_enable(
 u8 v_accel_slow_no_motion_en_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -14975,7 +14966,7 @@ return com_rslt;
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_accel_slow_no_motion_durn(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_accel_slow_no_motion_durn(
 u8 *v_accel_slow_no_motion_durn_u8)
 {
 	/* Variable used to return value of
@@ -15020,7 +15011,7 @@ u8 *v_accel_slow_no_motion_durn_u8)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_accel_slow_no_motion_durn(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_accel_slow_no_motion_durn(
 u8 v_accel_slow_no_motion_durn_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -15101,7 +15092,7 @@ return com_rslt;
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_gyro_any_motion_axis_enable(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_gyro_any_motion_axis_enable(
 u8 v_channel_u8, u8 *v_data_u8)
 {
 /* Variable used to return value of
@@ -15183,7 +15174,7 @@ return com_rslt;
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_gyro_any_motion_axis_enable(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_gyro_any_motion_axis_enable(
 u8 v_channel_u8, u8  v_data_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -15311,7 +15302,7 @@ return com_rslt;
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_gyro_highrate_axis_enable(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_gyro_highrate_axis_enable(
 u8 v_channel_u8, u8 *v_data_u8)
 {
 	/* Variable used to return value of
@@ -15393,7 +15384,7 @@ u8 v_channel_u8, u8 *v_data_u8)
  *
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_gyro_highrate_axis_enable(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_gyro_highrate_axis_enable(
 u8 v_channel_u8, u8 v_data_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -15510,7 +15501,7 @@ return com_rslt;
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_gyro_any_motion_filter(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_gyro_any_motion_filter(
 u8 *v_gyro_any_motion_filter_u8)
 {
 	/* Variable used to return value of
@@ -15558,7 +15549,7 @@ u8 *v_gyro_any_motion_filter_u8)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_gyro_any_motion_filter(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_gyro_any_motion_filter(
 u8 v_gyro_any_motion_filter_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -15631,7 +15622,7 @@ return com_rslt;
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_gyro_highrate_filter(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_gyro_highrate_filter(
 u8 *v_gyro_highrate_filter_u8)
 {
 	/* Variable used to return value of
@@ -15679,7 +15670,7 @@ u8 *v_gyro_highrate_filter_u8)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_gyro_highrate_filter(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_gyro_highrate_filter(
 u8 v_gyro_highrate_filter_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -15760,7 +15751,7 @@ return com_rslt;
  *     125            |    7.8125dps    |   1LSB
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_gyro_highrate_x_thres(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_gyro_highrate_x_thres(
 u8 *v_gyro_highrate_x_thres_u8)
 {
 	/* Variable used to return value of
@@ -15814,7 +15805,7 @@ u8 *v_gyro_highrate_x_thres_u8)
  *     125            |    7.8125dps    |   1LSB
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_gyro_highrate_x_thres(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_gyro_highrate_x_thres(
 u8 v_gyro_highrate_x_thres_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -15895,7 +15886,7 @@ return com_rslt;
  *     500            |    15.56dps     |   1LSB
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_gyro_highrate_x_hyst(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_gyro_highrate_x_hyst(
 u8 *v_gyro_highrate_x_hyst_u8)
 {
 	/* Variable used to return value of
@@ -15951,7 +15942,7 @@ u8 *v_gyro_highrate_x_hyst_u8)
  *     500            |    15.56dps     |   1LSB
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_gyro_highrate_x_hyst(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_gyro_highrate_x_hyst(
 u8 v_gyro_highrate_x_hyst_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -16024,7 +16015,7 @@ return com_rslt;
  *	(1 + v_gyro_highrate_x_durn_u8)*2.5ms
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_gyro_highrate_x_durn(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_gyro_highrate_x_durn(
 u8 *v_gyro_highrate_x_durn_u8)
 {
 	/* Variable used to return value of
@@ -16071,7 +16062,7 @@ u8 *v_gyro_highrate_x_durn_u8)
  *
  *	(1 + v_gyro_highrate_x_durn_u8)*2.5ms
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_gyro_highrate_x_durn(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_gyro_highrate_x_durn(
 u8 v_gyro_highrate_x_durn_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -16150,7 +16141,7 @@ if (v_stat_s8 == SUCCESS) {
  *     125            |    7.8125dps    |   1LSB
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_gyro_highrate_y_thres(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_gyro_highrate_y_thres(
 u8 *v_gyro_highrate_y_thres_u8)
 {
 	/* Variable used to return value of
@@ -16204,7 +16195,7 @@ u8 *v_gyro_highrate_y_thres_u8)
  *     125            |    7.8125dps    |   1LSB
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_gyro_highrate_y_thres(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_gyro_highrate_y_thres(
 u8 v_gyro_highrate_y_thres_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -16284,7 +16275,7 @@ return com_rslt;
  *     1000           |    31.13dps     |   1LSB
  *     500            |    15.56dps     |   1LSB
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_gyro_highrate_y_hyst(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_gyro_highrate_y_hyst(
 u8 *v_gyro_highrate_y_hyst_u8)
 {
 	/* Variable used to return value of
@@ -16339,7 +16330,7 @@ u8 *v_gyro_highrate_y_hyst_u8)
  *     1000           |    31.13dps     |   1LSB
  *     500            |    15.56dps     |   1LSB
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_gyro_highrate_y_hyst(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_gyro_highrate_y_hyst(
 u8 v_gyro_highrate_y_hyst_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -16411,7 +16402,7 @@ return com_rslt;
  *
  *	(1 + v_gyro_highrate_y_durn_u8)*2.5ms
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_gyro_highrate_y_durn(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_gyro_highrate_y_durn(
 u8 *v_gyro_highrate_y_durn_u8)
 {
 	/* Variable used to return value of
@@ -16458,7 +16449,7 @@ u8 *v_gyro_highrate_y_durn_u8)
  *
  *	(1 + v_gyro_highrate_y_durn_u8)*2.5ms
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_gyro_highrate_y_durn(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_gyro_highrate_y_durn(
 u8 v_gyro_highrate_y_durn_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -16538,7 +16529,7 @@ if (v_stat_s8 == SUCCESS) {
  *     125            |    7.8125dps    |   1LSB
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_gyro_highrate_z_thres(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_gyro_highrate_z_thres(
 u8 *v_gyro_highrate_z_thres_u8)
 {
 	/* Variable used to return value of
@@ -16592,7 +16583,7 @@ u8 *v_gyro_highrate_z_thres_u8)
  *     125            |    7.8125dps    |   1LSB
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_gyro_highrate_z_thres(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_gyro_highrate_z_thres(
 u8 v_gyro_highrate_z_thres_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -16672,7 +16663,7 @@ return com_rslt;
  *     1000           |    31.13dps     |   1LSB
  *     500            |    15.56dps     |   1LSB
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_gyro_highrate_z_hyst(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_gyro_highrate_z_hyst(
 u8 *v_gyro_highrate_z_hyst_u8)
 {
 	/* Variable used to return value of
@@ -16727,7 +16718,7 @@ u8 *v_gyro_highrate_z_hyst_u8)
  *     1000           |    31.13dps     |   1LSB
  *     500            |    15.56dps     |   1LSB
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_gyro_highrate_z_hyst(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_gyro_highrate_z_hyst(
 u8 v_gyro_highrate_z_hyst_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -16799,7 +16790,7 @@ return com_rslt;
  *
  *	(1 + v_gyro_highrate_z_durn_u8)*2.5ms
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_gyro_highrate_z_durn(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_gyro_highrate_z_durn(
 u8 *v_gyro_highrate_z_durn_u8)
 {
 	/* Variable used to return value of
@@ -16846,7 +16837,7 @@ u8 *v_gyro_highrate_z_durn_u8)
  *
  *	(1 + v_gyro_highrate_z_durn_u8)*2.5ms
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_gyro_highrate_z_durn(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_gyro_highrate_z_durn(
 u8 v_gyro_highrate_z_durn_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -16924,7 +16915,7 @@ if (v_stat_s8 == SUCCESS) {
  *     500            |    0.25dps    |   1LSB
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_gyro_any_motion_thres(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_gyro_any_motion_thres(
 u8 *v_gyro_any_motion_thres_u8)
 {
 	/* Variable used to return value of
@@ -16977,7 +16968,7 @@ u8 *v_gyro_any_motion_thres_u8)
  *     500            |    0.25dps    |   1LSB
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_gyro_any_motion_thres(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_gyro_any_motion_thres(
 u8 v_gyro_any_motion_thres_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -17053,7 +17044,7 @@ return com_rslt;
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_gyro_any_motion_slope_samples(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_gyro_any_motion_slope_samples(
 u8 *v_gyro_any_motion_slope_samples_u8)
 {
 	/* Variable used to return value of
@@ -17104,7 +17095,7 @@ u8 *v_gyro_any_motion_slope_samples_u8)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_gyro_any_motion_slope_samples(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_gyro_any_motion_slope_samples(
 u8 v_gyro_any_motion_slope_samples_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
@@ -17173,7 +17164,7 @@ if (v_stat_s8 == SUCCESS) {
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_get_gyro_any_motion_awake_durn(
+BNO055_RETURN_FUNCTION_TYPE bno055_get_gyro_any_motion_awake_durn(
 u8 *v_gyro_awake_durn_u8)
 {
 	/* Variable used to return value of
@@ -17216,7 +17207,7 @@ u8 *v_gyro_awake_durn_u8)
  *	@retval 1 -> Error
  *
  */
-BNO055_RETURN_FUNCTION_TYPE bno055::bno055_set_gyro_any_motion_awake_durn(
+BNO055_RETURN_FUNCTION_TYPE bno055_set_gyro_any_motion_awake_durn(
 u8 v_gyro_awake_durn_u8)
 {
 BNO055_RETURN_FUNCTION_TYPE com_rslt = ERROR;
