@@ -29,7 +29,7 @@ class Interface_UART {
     int SetupSerial(int fdes,int baud,int databits,int stopbits,int parity);
     
 public:
-//    Interface_UART();
+    Interface_UART();
     Interface_UART(const Interface_UART& orig);
     Interface_UART(const char *portname, int speed, int parity);
     virtual ~Interface_UART();
