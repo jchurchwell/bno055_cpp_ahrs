@@ -28,7 +28,7 @@ BNO055 *bno055;
 int main(int argc, char** argv) {
     
     bno055 = new BNO055(portname);
-    int i = 0;
+
     /* structure used to read the euler hrp data */
     struct bno055_euler_t euler_hrp;
     
@@ -37,11 +37,10 @@ int main(int argc, char** argv) {
     
     // Read the data forever
     while(1){
-        i++;
         bno055->bno055_read_euler_hrp(&euler_hrp);    
         bno055->bno055_convert_double_euler_hpr_deg(&d_euler_hpr);
         fflush(stdout);
-        printf(" == %u,%3.4f, %3.4f, %3.4f\r", i, d_euler_hpr.h, d_euler_hpr.p, d_euler_hpr.r);
+        printf("%3.4f, %3.4f, %3.4f\r", d_euler_hpr.h, d_euler_hpr.p, d_euler_hpr.r);
     }
 
     return 0;

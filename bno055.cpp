@@ -18,23 +18,6 @@
 #include <string>
 #include <stdio.h>
 
-
-
-void PRINTHELP(std::string str,BNO055_RETURN_FUNCTION_TYPE v)
-{
-    switch(v){
-        case ERROR:
-            printf("%s: ERROR,",str.c_str());
-            break;
-        case SUCCESS:
-            printf("%s: SUCCESS,",str.c_str());
-            break;
-        default:
-            printf("%s: DEFAULT,",str.c_str());
-            break;
-    }
-}
-
 BNO055::BNO055(const char* portname) {
     
     uart1 = new Interface(portname);
@@ -43,7 +26,7 @@ BNO055::BNO055(const char* portname) {
     u8 power_mode = BNO055_ZERO_U8X;    
 
     this->bno055_init();
-    printf("\n");
+    
     power_mode = POWER_MODE_NORMAL; /* set the power mode as NORMAL*/
     this->bno055_set_power_mode(power_mode);
     
@@ -205,7 +188,6 @@ BNO055_RETURN_FUNCTION_TYPE BNO055::bno055_init()
                                         BNO055_PAGE_ID__REG, 
                                         &v_page_zero_u8, 
                                         BNO055_ONE_U8X);
-    PRINTHELP("vno055_init(1)",com_rslt);
     /* Read the chip id of the sensor from page
     zero 0x00 register*/
     com_rslt += BNO055::BNO055_bus_read(p_bno055->dev_addr,
@@ -213,7 +195,7 @@ BNO055_RETURN_FUNCTION_TYPE BNO055::bno055_init()
                                         &v_data_u8, 
                                         BNO055_ONE_U8X);
     p_bno055->chip_id = v_data_u8;
-    PRINTHELP("vno055_init(2)",com_rslt);
+    
     /* Read the accel revision id from page
     zero 0x01 register*/
     com_rslt += BNO055::BNO055_bus_read(p_bno055->dev_addr,
@@ -720,16 +702,16 @@ BNO055_RETURN_FUNCTION_TYPE BNO055::bno055_convert_double_euler_hpr_deg(struct b
 	u8 v_euler_unit_u8 = BNO055_ZERO_U8X;
 	/* Read the current Euler unit and set the
 	unit as degree if the unit is in radians */
-        PRINTHELP("INIT",com_rslt);
+        
 	com_rslt = this->bno055_get_euler_unit(&v_euler_unit_u8);
-        PRINTHELP("GET_UNIT",com_rslt);
+        
 	if (v_euler_unit_u8 != EULER_UNIT_DEG)
 		com_rslt += this->bno055_set_euler_unit(EULER_UNIT_DEG);
-        PRINTHELP("SET UNIT",com_rslt);
+        
 	if (com_rslt == SUCCESS) {
 		/* Read Euler raw h data*/
 		com_rslt += this->bno055_read_euler_hrp(&reg_euler);
-		PRINTHELP("READ_HRP",com_rslt);
+		
                 if (com_rslt == SUCCESS) {
 			/* Convert raw Euler hrp to degree*/
 			euler_hpr->h =
@@ -744,7 +726,6 @@ BNO055_RETURN_FUNCTION_TYPE BNO055::bno055_convert_double_euler_hpr_deg(struct b
 	} else {
 	com_rslt = ERROR;
 	}
-        PRINTHELP("RETURN",com_rslt);
 	return com_rslt;
 }
 /*!
