@@ -12,13 +12,13 @@
  */
 
 #include <cstdlib>
-#include "BNO055.h"
+#include "bno055.h"
 #include <unistd.h>
 #include <stdio.h>
 
 using namespace std;
 
-const char *portname = "/dev/ttyS2";
+const char *portname = "/dev/ttyUSB0";
 
 BNO055 *bno055;
 

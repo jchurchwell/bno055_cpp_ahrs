@@ -12,7 +12,7 @@
  */
 
 #include "Interface.h"
-#include "BNO055.h"
+#include "bno055.h"
 #include <cstdlib>
 #include <unistd.h>
 #include <string>

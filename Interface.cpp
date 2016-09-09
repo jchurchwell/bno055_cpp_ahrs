@@ -35,12 +35,12 @@ Interface::~Interface() {
     bno055UART->~Interface_UART();
 }
 
-Interface::Read(u8 *data_rtn, u8 *byte_count)
+void Interface::Read(u8 *data_rtn, u8 *byte_count)
 {    
     bno055UART->read_data(data_rtn, byte_count);    
 }
 
-Interface::Write(u8 *data_out, u8 byte_count)
+void Interface::Write(u8 *data_out, u8 byte_count)
 {   
     bno055UART->flush_buffer();
     bno055UART->write_data(data_out, byte_count);    

@@ -21,8 +21,8 @@ public:
     Interface(const Interface& orig);
     virtual ~Interface();
     
-    Read(unsigned char *data_rtn, unsigned char *byte_count);
-    Write(unsigned char *data_out, unsigned char byte_count);
+    void Read(unsigned char *data_rtn, unsigned char *byte_count);
+    void Write(unsigned char *data_out, unsigned char byte_count);
     
 private:
     Interface_UART *bno055UART;
