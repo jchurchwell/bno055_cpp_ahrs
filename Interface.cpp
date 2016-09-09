@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-#include "Interface_UART.h"
+#include "Interface_UART.hpp"
 #include "Interface.h"
 
 /* 

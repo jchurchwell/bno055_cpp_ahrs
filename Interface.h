@@ -10,7 +10,7 @@
  *
  * Created on August 11, 2016, 8:42 AM
  */
-#include "Interface_UART.h"
+#include "Interface_UART.hpp"
 #ifndef INTERFACE_H
 #define INTERFACE_H
 
