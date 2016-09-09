@@ -1,7 +1,7 @@
 # bno055_cpp_ahrs
 A C++ API for the Bosch Sensortec BNO055 AHRS
 
-How to build the Library (to be used elsewhere)
+##How to build the Library (to be used elsewhere)
 
 1) Compile
 
@@ -13,7 +13,7 @@ ar -cq libBNO055.a bno055.o Interface.o
 
 3) Link to it when compiling with the -I and -L flags correctly and the -lBNO055 to finish it off.
 
-How to build sample program (main.cpp)
+##How to build sample program (main.cpp)
 
 1) Ensure that the port specified in main is the correct one for your BNO device.
 
