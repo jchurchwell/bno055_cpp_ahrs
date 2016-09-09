@@ -842,3 +842,24 @@ if (p_bno055 == BNO055_ZERO_U8X) {
 		(v_prev_opmode_u8);
 	return com_rslt;
 }
+
+void BNO055::bno055_read_new()
+{
+	this->bno055_read_euler_hrp(&euler_hrp);
+	this->bno055_convert_double_euler_hpr_deg(&d_euler_hrp);
+}
+
+double BNO055::Heading()
+{
+	return this->d_euler_hrp.h;
+}
+
+double BNO055::Roll()
+{
+	return this->d_euler_hrp.r;
+}
+
+double BNO055::Pitch()
+{
+	return this->d_euler_hrp.p;
+}

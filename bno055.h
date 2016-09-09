@@ -3471,9 +3471,17 @@ public:
     BNO055_RETURN_FUNCTION_TYPE bno055_convert_double_euler_hpr_deg(struct bno055_euler_double_t *euler_hpr);
     BNO055_RETURN_FUNCTION_TYPE bno055_get_euler_unit(u8 *v_euler_unit_u8);
     BNO055_RETURN_FUNCTION_TYPE bno055_set_euler_unit(u8 v_euler_unit_u8);
-    
+    void bno055_read_new();
+	double Heading();
+	double Roll();
+	double Pitch();
+
+
 private:
     Interface *uart1;
+	struct bno055_euler_t euler_hrp;
+	struct bno055_euler_double_t d_euler_hrp;
+
 };
 
 #endif /* BNO055_H */
