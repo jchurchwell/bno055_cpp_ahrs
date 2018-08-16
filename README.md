@@ -17,7 +17,7 @@ ar -cq libBNO055.a bno055.o Interface.o
 
 1) Ensure that the port specified in main is the correct one for your BNO device.
 
-2) Compile that shit.
+2) Compile that stuff.
 
 g++ bno055.cpp Interface.cpp main.cpp -I /Wherever/The/Interface_UART/Library/Is/ -L /Wherever/The/Interface_UART/Library/Is/ -lInterface_UART -o BNOTest
 
